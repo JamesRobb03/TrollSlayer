@@ -1,0 +1,157 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Interface/youwin.png" type="Texture" id=1]
+[ext_resource path="res://sprites/Big Monster/idle.png" type="Texture" id=2]
+[ext_resource path="res://sprites/coin.png" type="Texture" id=3]
+[ext_resource path="res://scripts/mainMenu.gd" type="Script" id=4]
+[ext_resource path="res://Interface/mainmenu.png" type="Texture" id=5]
+[ext_resource path="res://scripts/WinScreen.gd" type="Script" id=6]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 145, 74 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 74, 145, 74 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 148, 145, 74 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 222, 145, 74 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 296, 145, 74 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 370, 145, 74 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 9.0
+} ]
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 256, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 320, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="WinScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.352941 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Boss" type="AnimatedSprite" parent="."]
+position = Vector2( 48, 147 )
+frames = SubResource( 7 )
+frame = 3
+playing = true
+
+[node name="Coin" type="AnimatedSprite" parent="."]
+position = Vector2( 34, 105 )
+scale = Vector2( 0.453125, 0.453125 )
+frames = SubResource( 14 )
+frame = 1
+playing = true
+
+[node name="Coin2" type="AnimatedSprite" parent="."]
+position = Vector2( 267, 104 )
+scale = Vector2( 0.453125, 0.453125 )
+frames = SubResource( 14 )
+frame = 1
+playing = true
+
+[node name="Coin3" type="AnimatedSprite" parent="."]
+position = Vector2( 184, 104 )
+scale = Vector2( 0.453125, 0.453125 )
+frames = SubResource( 14 )
+playing = true
+
+[node name="Coin4" type="AnimatedSprite" parent="."]
+position = Vector2( 118, 105 )
+scale = Vector2( 0.453125, 0.453125 )
+frames = SubResource( 14 )
+frame = 5
+playing = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 1.0
+margin_top = -62.0
+margin_right = 1.0
+margin_bottom = 2.0
+texture = ExtResource( 1 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -51.0
+margin_top = -60.0
+margin_right = 61.0
+margin_bottom = -22.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+enabled_focus_mode = 0
+icon = ExtResource( 5 )
+flat = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Button" to="Button" method="_on_Button_pressed"]

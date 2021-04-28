@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Interface/Bar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Interface/interface.gd" type="Script" id=2]
+[ext_resource path="res://Interface/bg.png" type="Texture" id=3]
+[ext_resource path="res://Interface/fill.png" type="Texture" id=4]
+[ext_resource path="res://Interface/StaminaBar.gd" type="Script" id=5]
+[ext_resource path="res://sprites/deaths.png" type="Texture" id=6]
+[ext_resource path="res://Interface/Label.gd" type="Script" id=7]
+[ext_resource path="res://sprites/8-bit-pusab.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 8 )
+
+[node name="interface" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bar" parent="." instance=ExtResource( 1 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+
+[node name="StaminaBar" type="HBoxContainer" parent="."]
+margin_left = 24.0
+margin_top = 22.0
+margin_right = 420.0
+margin_bottom = 75.0
+rect_scale = Vector2( 0.2, 0.2 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="StaminaBar"]
+margin_right = 396.0
+margin_bottom = 53.0
+max_value = 250.0
+value = 250.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+tint_under = Color( 0, 0, 0, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -64.0
+margin_top = 10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+size_flags_horizontal = 9
+texture = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_left = 36.0
+margin_top = 8.0
+margin_right = 44.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+script = ExtResource( 7 )
+[connection signal="healthChanged" from="." to="Bar" method="_on_interface_healthChanged"]
+[connection signal="staminaChanged" from="." to="StaminaBar" method="_on_interface_staminaChanged"]
