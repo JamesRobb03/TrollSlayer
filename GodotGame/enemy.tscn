@@ -1,0 +1,290 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Attack3.png" type="Texture" id=1]
+[ext_resource path="res://enemy.gd" type="Script" id=2]
+[ext_resource path="res://Music/monsternoise.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Music/enemyDamage.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Components/Health.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Components/EnemyMovement.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Components/FSM.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sprites/mushroomhead/Idle.png" type="Texture" id=8]
+[ext_resource path="res://sprites/mushroomhead/Run.png" type="Texture" id=9]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 26.0021
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6, 14 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 12, 19 )
+
+[sub_resource type="Animation" id=4]
+resource_local_to_scene = true
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/attackRange/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 1.07481 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("IdleSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("RunSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("IdleSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("IdleSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RunSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "running"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("RunSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RunSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("IdleSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 104, 44 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 26.6667, 25 )
+
+[node name="enemy" type="KinematicBody2D"]
+scale = Vector2( 0.75, 0.75 )
+z_index = 1
+collision_layer = 2147483650
+collision_mask = 3
+script = ExtResource( 2 )
+damage = 30
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -9.33333 )
+texture = ExtResource( 1 )
+hframes = 11
+frame = 10
+
+[node name="attackRange" type="Area2D" parent="Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/attackRange"]
+position = Vector2( 6, -3 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="BodyCollider" type="CollisionShape2D" parent="."]
+position = Vector2( -1, 3 )
+shape = SubResource( 2 )
+
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+modulate = Color( 0, 1, 0.439216, 1 )
+position = Vector2( 0, -2 )
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/explode = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/running = SubResource( 6 )
+
+[node name="damageTimer" type="Timer" parent="."]
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -12, -22, 25, 40 )
+physics_process_parent = true
+
+[node name="Scream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+max_distance = 300.0
+
+[node name="damage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Health" parent="." instance=ExtResource( 5 )]
+
+[node name="Movement" parent="." instance=ExtResource( 6 )]
+acceleration = 400
+maxHorizontalSpeed = 35
+
+[node name="FSM" parent="." instance=ExtResource( 7 )]
+
+[node name="IdleSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -9.333 )
+texture = ExtResource( 8 )
+hframes = 4
+frame = 3
+
+[node name="RunSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -9.333 )
+texture = ExtResource( 9 )
+hframes = 8
+frame = 2
+
+[node name="enemyVision" type="Area2D" parent="."]
+position = Vector2( 0, -0.333334 )
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemyVision"]
+modulate = Color( 0.921569, 0, 1, 1 )
+position = Vector2( 0, -27 )
+shape = SubResource( 7 )
+
+[node name="inRange" type="Area2D" parent="."]
+position = Vector2( 0, -9.33333 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="inRange"]
+position = Vector2( 0, 2.33333 )
+shape = SubResource( 8 )
+[connection signal="body_entered" from="Sprite/attackRange" to="." method="_on_attackRange_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="enemyVision" to="." method="_on_enemyVision_body_entered"]
+[connection signal="body_exited" from="enemyVision" to="." method="_on_enemyVision_body_exited"]
+[connection signal="body_entered" from="inRange" to="." method="_on_inRange_body_entered"]
+[connection signal="body_exited" from="inRange" to="." method="_on_inRange_body_exited"]

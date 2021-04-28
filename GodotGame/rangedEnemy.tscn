@@ -1,0 +1,97 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://sprites/Flight.png" type="Texture" id=1]
+[ext_resource path="res://rangedEnemy.gd" type="Script" id=2]
+[ext_resource path="res://Components/Health.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Components/rangedAttack.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Components/EnemyMovement.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Components/FSM.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Music/batAggro.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Music/spit.ogg" type="AudioStream" id=8]
+[ext_resource path="res://SoundEffects.gd" type="Script" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 19, 14 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 94.0213
+
+[sub_resource type="Animation" id=3]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=4]
+height = 0.0
+
+[node name="rangedEnemy" type="KinematicBody2D"]
+scale = Vector2( -1, 1 )
+collision_layer = 8
+script = ExtResource( 2 )
+attack = ExtResource( 4 )
+
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+modulate = Color( 0, 1, 0.462745, 1 )
+position = Vector2( 2, 0 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 8
+
+[node name="enemyVision" type="Area2D" parent="Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/enemyVision"]
+position = Vector2( 5, 3 )
+shape = SubResource( 2 )
+
+[node name="AnimPlay" type="AnimationPlayer" parent="."]
+anims/idle = SubResource( 3 )
+
+[node name="bodyCollider" type="CollisionShape2D" parent="."]
+position = Vector2( 5, 3 )
+shape = SubResource( 4 )
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="FSM" parent="." instance=ExtResource( 6 )]
+
+[node name="Movement" parent="." instance=ExtResource( 5 )]
+acceleration = 300
+maxHorizontalSpeed = 30
+
+[node name="Health" parent="." instance=ExtResource( 3 )]
+maxHealth = 50
+
+[node name="SoundEffects" type="Node2D" parent="."]
+script = ExtResource( 9 )
+
+[node name="spit" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 8 )
+volume_db = -10.0
+pitch_scale = 1.2
+
+[node name="aggro" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 7 )
+volume_db = -10.0
+pitch_scale = 1.4
+
+[node name="damageTimer" type="Timer" parent="."]
+[connection signal="body_entered" from="Sprite/enemyVision" to="." method="_on_enemyVision_body_entered"]
+[connection signal="body_exited" from="Sprite/enemyVision" to="." method="_on_enemyVision_body_exited"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
+[connection signal="timeout" from="damageTimer" to="." method="_on_damageTimer_timeout"]

@@ -1,0 +1,289 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://viking2.png" type="Texture" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://dashSprite.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Music/damage.ogg" type="AudioStream" id=4]
+[ext_resource path="res://SoundEffects.gd" type="Script" id=5]
+[ext_resource path="res://Music/sword.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Music/dash.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Music/death.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Components/Health.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Components/Stamina.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sprites/stun.png" type="Texture" id=11]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5, 9 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6, 8 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 27, 28, 29, 30, 31 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/attackHit/sword:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.200529, 0.401058 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "block"
+length = 0.6
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 38, 39, 40, 41 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 45, 46, 47, 48, 49, 50, 51, 52, 53, 53 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.2
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 21 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+
+[sub_resource type="Animation" id=8]
+
+[sub_resource type="Animation" id=9]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 19, 20, 21, 22 ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 9, 10, 11, 12, 13, 14 ]
+}
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 128, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 256, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 384, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 512, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 640, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 768, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 896, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 1024, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=20]
+animations = [ {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
+
+[node name="Player" type="KinematicBody2D"]
+z_index = 1
+collision_layer = 16
+collision_mask = 2147483649
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+gravity = 300
+acceleration = 400
+maxHorizontalSpeed = 80
+maxFallSpeed = 200
+jumpHeight = -155
+attackDamage = 50
+dashObject = ExtResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, -10 )
+current = true
+smoothing_enabled = true
+smoothing_speed = 10.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 6
+hframes = 9
+frame = 1
+
+[node name="attackHit" type="Area2D" parent="Sprite"]
+
+[node name="sword" type="CollisionShape2D" parent="Sprite/attackHit"]
+position = Vector2( 11, 7 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Collider" type="CollisionShape2D" parent="." groups=[
+"player",
+]]
+position = Vector2( 1, 8 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack = SubResource( 3 )
+anims/block = SubResource( 4 )
+anims/death = SubResource( 5 )
+anims/falling = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/jumo = SubResource( 8 )
+anims/jump = SubResource( 9 )
+anims/run = SubResource( 10 )
+
+[node name="dashTimer" type="Timer" parent="."]
+
+[node name="attackTimer" type="Timer" parent="."]
+
+[node name="damageTimer" type="Timer" parent="."]
+
+[node name="deathTime" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="SoundEffects" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="sword" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+pitch_scale = 1.5
+
+[node name="death" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 8 )
+
+[node name="damage" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 4 )
+
+[node name="dash" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 7 )
+
+[node name="Stamina" parent="." instance=ExtResource( 10 )]
+blockStamina = 10
+
+[node name="Health" parent="." instance=ExtResource( 9 )]
+
+[node name="stunTimer" type="Timer" parent="."]
+
+[node name="knockupTimer" type="Timer" parent="."]
+
+[node name="stunAnimation" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 2, -3 )
+scale = Vector2( 0.328125, 0.210938 )
+frames = SubResource( 20 )
+frame = 7
+playing = true
+[connection signal="area_entered" from="Sprite/attackHit" to="." method="_on_attackHit_area_entered"]
+[connection signal="timeout" from="deathTime" to="." method="_on_deathTime_timeout"]
+[connection signal="timeout" from="stunTimer" to="." method="_on_stunTimer_timeout"]
+[connection signal="timeout" from="knockupTimer" to="." method="_on_knockupTimer_timeout"]

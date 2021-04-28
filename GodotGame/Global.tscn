@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Global.gd" type="Script" id=1]
+[ext_resource path="res://Music/background music.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Music/bossmusic.wav" type="AudioStream" id=3]
+
+[node name="Global" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="backgroundMusic" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 2 )
+volume_db = -30.0
+
+[node name="BossMusic" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 3 )
