@@ -214,6 +214,7 @@ func dropCoin():
 	var tempCoin = coin.instance()
 	get_parent().add_child(tempCoin)
 	tempCoin.global_position = global_position
+	queue_free() #Once a coin has been dropped, delete the boss from memory
 
 #Signals and timers
 

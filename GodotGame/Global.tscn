@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Global.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Global.gd" type="Script" id=1]
 [ext_resource path="res://Music/background music.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Music/bossmusic.wav" type="AudioStream" id=3]
+
 
 [node name="Global" type="Node2D"]
 script = ExtResource( 1 )

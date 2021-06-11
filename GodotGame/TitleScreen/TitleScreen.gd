@@ -28,3 +28,7 @@ func _on_backButton_pressed():
 	$Sprite.visible = true
 	$PlayerSprite.visible = true
 
+
+
+func _on_Help_pressed():
+	get_tree().change_scene("res://Interface/Help Menu.tscn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://TitleScreen/titlescreen.png" type="Texture" id=1]
 [ext_resource path="res://TitleScreen/PlayGame.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://viking2.png" type="Texture" id=9]
 [ext_resource path="res://Interface/back.png" type="Texture" id=10]
 [ext_resource path="res://sprites/Big Monster/idle.png" type="Texture" id=11]
+[ext_resource path="res://Interface/gelp.png" type="Texture" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "idle"
@@ -81,9 +82,9 @@ custom_constants/separation = 20
 alignment = 1
 
 [node name="playButton" type="Button" parent="Menu/Buttons"]
-margin_top = 31.0
+margin_top = 8.0
 margin_right = 156.0
-margin_bottom = 57.0
+margin_bottom = 34.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 enabled_focus_mode = 0
@@ -92,19 +93,29 @@ flat = true
 script = ExtResource( 4 )
 
 [node name="optionsButton" type="Button" parent="Menu/Buttons"]
-margin_top = 77.0
+margin_top = 54.0
 margin_right = 156.0
-margin_bottom = 103.0
+margin_bottom = 80.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 enabled_focus_mode = 0
 icon = ExtResource( 6 )
 flat = true
 
-[node name="quitButton" type="Button" parent="Menu/Buttons"]
-margin_top = 123.0
+[node name="Help" type="Button" parent="Menu/Buttons"]
+margin_top = 100.0
 margin_right = 156.0
-margin_bottom = 149.0
+margin_bottom = 126.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+enabled_focus_mode = 0
+icon = ExtResource( 12 )
+flat = true
+
+[node name="quitButton" type="Button" parent="Menu/Buttons"]
+margin_top = 146.0
+margin_right = 156.0
+margin_bottom = 172.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
 enabled_focus_mode = 0
@@ -144,5 +155,6 @@ frame = 3
 anims/idle = SubResource( 1 )
 [connection signal="pressed" from="Menu/Buttons/playButton" to="Menu/Buttons/playButton" method="_on_playButton_pressed"]
 [connection signal="pressed" from="Menu/Buttons/optionsButton" to="." method="_on_optionsButton_pressed"]
+[connection signal="pressed" from="Menu/Buttons/Help" to="." method="_on_Help_pressed"]
 [connection signal="pressed" from="Menu/Buttons/quitButton" to="Menu/Buttons/quitButton" method="_on_quitButton_pressed"]
 [connection signal="pressed" from="backButton" to="." method="_on_backButton_pressed"]

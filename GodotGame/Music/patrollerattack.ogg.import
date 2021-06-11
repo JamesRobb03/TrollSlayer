@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/patrollerattack.ogg-97b26ebcdb78e337baaf865223b425d2.oggstr"
+
+[deps]
+
+source_file="res://Music/patrollerattack.ogg"
+dest_files=[ "res://.import/patrollerattack.ogg-97b26ebcdb78e337baaf865223b425d2.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
