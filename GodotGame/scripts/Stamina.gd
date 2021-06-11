@@ -12,16 +12,17 @@ onready var timer = $blockTimer
 
 signal staminaAmount(currentStamina)
 
-#runs every frame
+#runs every frame game loop for stamina
 func _physics_process(delta):
 	stamina()
-	
+
+#function for regenerating stamina
 func stamina():
 	if currentStamina < playerStamina:
 		currentStamina+=staminaRegenRate
 	emit_signal("staminaAmount", currentStamina)
 
-#playerDashed
+#returns true if can dash, false if cannot
 func playerDash():
 	if currentStamina - dashStamina < 0:
 		return false
@@ -30,7 +31,7 @@ func playerDash():
 		return true
 
 
-#playerBlocked
+#return true if can block, false if cannot
 func playerBlock():
 	
 	if canBlock == true:

@@ -14,11 +14,12 @@
 [ext_resource path="res://sprites/Big Monster/Bidamaged and death.png" type="Texture" id=12]
 [ext_resource path="res://rangedEnemy.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/MoneyBag.tscn" type="PackedScene" id=14]
-[ext_resource path="res://SoundEffects.gd" type="Script" id=15]
+[ext_resource path="res://scripts/SoundEffects.gd" type="Script" id=15]
 [ext_resource path="res://Music/slam.ogg" type="AudioStream" id=16]
 [ext_resource path="res://Music/bossDeath.ogg" type="AudioStream" id=17]
 [ext_resource path="res://Music/youSuck.ogg" type="AudioStream" id=18]
 [ext_resource path="res://Music/bossDamage.ogg" type="AudioStream" id=19]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 39.3333 )

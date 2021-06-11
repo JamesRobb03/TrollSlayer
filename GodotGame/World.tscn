@@ -9,9 +9,9 @@
 [ext_resource path="res://Interface/interface.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Interface/quit.png" type="Texture" id=8]
 [ext_resource path="res://Interface/resume.png" type="Texture" id=9]
-[ext_resource path="res://PauseMenu.gd" type="Script" id=10]
-[ext_resource path="res://quit.gd" type="Script" id=11]
-[ext_resource path="res://resume.gd" type="Script" id=12]
+[ext_resource path="res://scripts/PauseMenu.gd" type="Script" id=10]
+[ext_resource path="res://scripts/quit.gd" type="Script" id=11]
+[ext_resource path="res://scripts/resume.gd" type="Script" id=12]
 [ext_resource path="res://Platforms/movingPlatform.tscn" type="PackedScene" id=13]
 [ext_resource path="res://rangedEnemy.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Boss.tscn" type="PackedScene" id=15]
@@ -609,7 +609,7 @@ flat = true
 position = Vector2( 108, 128 )
 
 [node name="stunAnimation" parent="Player" index="13"]
-frame = 4
+frame = 6
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( -1, 0 )

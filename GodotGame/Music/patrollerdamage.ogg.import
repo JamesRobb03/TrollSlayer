@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/patrollerdamage.ogg-4f8bc558dc4a1278980f7fa255d7f548.oggstr"
+
+[deps]
+
+source_file="res://Music/patrollerdamage.ogg"
+dest_files=[ "res://.import/patrollerdamage.ogg-4f8bc558dc4a1278980f7fa255d7f548.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

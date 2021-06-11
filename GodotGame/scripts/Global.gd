@@ -28,8 +28,8 @@ onready var backgroundMusic = $backgroundMusic
 onready var bossMusic = $BossMusic
 
 func _ready():
-	startingVolumeBackground = bossMusic.volume_db 
-	startingVolumeBoss = backgroundMusic.volume_db
+	startingVolumeBackground = backgroundMusic.volume_db 
+	startingVolumeBoss = bossMusic.volume_db 
 	backgroundMusic.play()
 	resolution() #sets default resolution settings
 	

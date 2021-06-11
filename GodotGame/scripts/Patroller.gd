@@ -8,8 +8,10 @@ onready var animPlayer = $AnimationPlayer
 onready var onFloor = $onFloor
 onready var onWall = $onWall
 onready var damagetimer = $damageTimer
+onready var soundeffects = $soundeffects
 
 var inAttackRange = false
+var attackFinished = true
 
 var motion = Vector2.ZERO
 var target = null
@@ -23,6 +25,7 @@ func _ready():
 #game loop for the patroller, running the movement system and the animation system
 func _physics_process(delta):
 	enemyMovementSystem(delta)
+	soundSystem()
 	animationSystem()
 	
 #Different to the other enemy movement systems as the patroller only has two states
@@ -42,8 +45,10 @@ func enemyMovementSystem(var delta):
 func animationSystem():
 	if FSM.currentState == "idle":
 		animPlayer.play("running")
-	elif FSM.currentState == "attack":	
-		animPlayer.play("attack") #attack logic within the animation. the collision box is animated on and off.
+	elif FSM.currentState == "attack":
+		if attackFinished:
+			animPlayer.play("attack") #attack logic within the animation. the collision box is animated on and off.
+			attackFinished = false
 	else:
 		print("ERROR IN ANIMATION SYSTEM")
 
@@ -51,14 +56,16 @@ func animationSystem():
 func soundSystem():
 	if FSM.currentState == "idle":
 		pass
-	elif FSM.currentState == "attack":	
-		pass
+	elif FSM.currentState == "attack":
+		if attackFinished:
+			soundeffects.playSoundEffect("attack")
 	else:
 		print("ERROR")
 
 #function which uses health component to keep track of current health.
 #also turns the color red for .2 seconds to show it has been hit
 func takeDamage(var attackDamage):
+	soundeffects.playSoundEffect("damage")
 	modulate = Color(0.86, 0.08, 0.24, 1)
 	damagetimer.start(0.2)
 	healthComponent.takeDamage(attackDamage)
@@ -82,6 +89,7 @@ func _on_AttackRange_body_exited(body):
 #when animation completed set state tp idle if not in attack range
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "attack":
+		attackFinished = true
 		if !inAttackRange:
 			FSM.setStateIdle()
 
